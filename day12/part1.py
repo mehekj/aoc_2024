@@ -9,25 +9,15 @@ def calc_dims(grid, visited, row, col, dims):
     char = grid[row][col]
     visited[row][col] = 1
 
-    if valid(grid, row + 1, col) and grid[row + 1][col] == char:
-        dims[1] -= 1
-        if not visited[row + 1][col]:
-            calc_dims(grid, visited, row + 1, col, dims)
+    dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    for dir in dirs:
+        r = row + dir[0]
+        c = col + dir[1]
 
-    if valid(grid, row - 1, col) and grid[row - 1][col] == char:
-        dims[1] -= 1
-        if not visited[row - 1][col]:
-            calc_dims(grid, visited, row - 1, col, dims)
-
-    if valid(grid, row, col + 1) and grid[row][col + 1] == char:
-        dims[1] -= 1
-        if not visited[row][col + 1]:
-            calc_dims(grid, visited, row, col + 1, dims)
-
-    if valid(grid, row, col - 1) and grid[row][col - 1] == char:
-        dims[1] -= 1
-        if not visited[row][col - 1]:
-            calc_dims(grid, visited, row, col - 1, dims)
+        if valid(grid, r, c) and grid[r][c] == char:
+            dims[1] -= 1
+            if not visited[r][c]:
+                calc_dims(grid, visited, r, c, dims)
 
 
 def main():
